@@ -24,13 +24,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
 
 //To blog page
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
 //To single blog post page
-Route::get('/blog/single-blog-post', [BlogController::class, 'show'])->name('single');
+Route::get('/blog/single-blog-post', [BlogController::class, 'show'])->name('blog.single');
 
 //To about page
 Route::get('/about', [WelcomeController::class, 'about'])->name('about');
 
 //To contact page
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

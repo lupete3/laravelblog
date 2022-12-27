@@ -23,14 +23,14 @@
       <!-- sidebar -->
       <div class="sidebar">
         <span class="closeButton">&times;</span>
-        <p class="brand-title"><a href="">Alphayo Blog</a></p>
+        <p class="brand-title"><a href="{{ route('welcome') }}">Placide Blog</a></p>
 
         <div class="side-links">
           <ul>
             <li><a class="active" href="{{ route('welcome') }}">Home</a></li>
-            <li><a href="{{ route('blog') }}">Blog</a></li>
+            <li><a href="{{ route('blog.index') }}">Blog</a></li>
             <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('contact') }}">Contact</a></li>
+            <li><a href="{{ route('contact.index') }}">Contact</a></li>
           </ul>
         </div>
 
