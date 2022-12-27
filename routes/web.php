@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //To welcome page
-Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
+Route::get('/',[WelcomeController::class, 'index'])->name('welcome.index');
 
 //To blog page
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
