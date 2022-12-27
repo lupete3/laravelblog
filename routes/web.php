@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +20,17 @@ use Illuminate\Support\Facades\Route;
 //   return view('welcome');
 // });
 
-Route::get('/test',[WelcomeController::class, 'index']);
+//To welcome page
+Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
+
+//To blog page
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+
+//To single blog post page
+Route::get('/blog/single-blog-post', [BlogController::class, 'show'])->name('single');
+
+//To about page
+Route::get('/about', [WelcomeController::class, 'about'])->name('about');
+
+//To contact page
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
