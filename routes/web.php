@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,21 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//   return view('welcome');
-// });
-
-//To welcome page
 Route::get('/',[WelcomeController::class, 'index'])->name('welcome.index');
+Route::get('/blog',[BlogController::class, 'index'])->name('blog.index');
+Route::get('/single-blog-post',[BlogController::class, 'show'])->name('blog.single');
+Route::get('/about',[WelcomeController::class, 'about'])->name('about');
+Route::get('/contact',[ContactController::class, 'index'])->name('contact.index');
 
-//To blog page
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-//To single blog post page
-Route::get('/blog/single-blog-post', [BlogController::class, 'show'])->name('blog.single');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-//To about page
-Route::get('/about', [WelcomeController::class, 'about'])->name('about');
-
-//To contact page
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+require __DIR__.'/auth.php';
