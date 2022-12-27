@@ -17,13 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//To home page
 Route::get('/',[WelcomeController::class, 'index'])->name('welcome.index');
+//To blog page
 Route::get('/blog',[BlogController::class, 'index'])->name('blog.index');
+//To a single post page 
 Route::get('/blog/single-blog-post',[BlogController::class, 'show'])->name('blog.single');
+//To create a poste page
 Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
+//To store data post in Db
+Route::post('/blog',[BlogController::class, 'store'])->name('blog.store');
+//To about page
 Route::get('/about',[WelcomeController::class, 'about'])->name('about');
+//To contact index
 Route::get('/contact',[ContactController::class, 'index'])->name('contact.index');
 
+//To dashboard page
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

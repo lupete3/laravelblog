@@ -38,6 +38,11 @@
                 <li><a class="{{ Request::routeIs('register') ? 'active' : '' }} " href="{{ route('register') }}">Register</a></li>
         
             @endguest 
+
+            @auth
+                <li><a class="{{ Request::routeIs('dashboard') ? 'active' : '' }} " href="{{ route('dashboard') }}">Dashboard</a></li>
+
+            @endauth
                             
           </ul>
         </div>
@@ -100,6 +105,9 @@
       document
         .querySelectorAll("img")
         .forEach((img) => img.addEventListener("load", () => AOS.refresh()));
+
+        
     </script>
+    
   </body>
 </html>
