@@ -65,7 +65,6 @@ return [
         'numeric' => 'The :attribute must be greater than or equal to :value.',
         'string' => 'The :attribute must be greater than or equal to :value characters.',
     ],
-    'image' => 'The :attribute must be an image.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'The :attribute must be an integer.',
@@ -146,6 +145,7 @@ return [
     'ulid' => 'The :attribute must be a valid ULID.',
     'uuid' => 'The :attribute must be a valid UUID.',
 
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -157,10 +157,20 @@ return [
     |
     */
 
+    //Messages validation rcustomised
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'title' => [
+            'required' => 'Please enter a title please',
+            'min' => 'The title must be under 3 characters',
+        ],
+        'image' => [
+            'image' => 'Choose a ivalide image',
+            'required' => 'Choose a image file please',
+        ]
+        
     ],
 
     /*
@@ -174,6 +184,7 @@ return [
     |
     */
 
+    //Attributes messages customised
     'attributes' => [],
 
 ];
