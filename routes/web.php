@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[WelcomeController::class, 'index'])->name('welcome.index');
 //To blog page
 Route::get('/blog',[BlogController::class, 'index'])->name('blog.index');
-//To a single post page 
-Route::get('/blog/{post:slug}',[BlogController::class, 'show'])->name('blog.single');
 //To create a poste page
 Route::get('/blog/create',[BlogController::class, 'create'])->name('blog.create');
+//To a single post page 
+Route::get('/blog/{post:slug}',[BlogController::class, 'show'])->name('blog.single');
 //To store data post in Db
 Route::post('/blog',[BlogController::class, 'store'])->name('blog.store');
 //To about page

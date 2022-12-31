@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        $posts = Post::latest()->get();
         return view('blogPosts.blog', compact('posts'));
     }
 
@@ -18,8 +18,13 @@ class BlogController extends Controller
         return view('blogPosts.create-blog-post');
     }
 
-    public function show($slug){
+    /* public function show($slug){
         $post = Post::where('slug', $slug)->first();
+        return view('blogPosts.single-blog-post', compact('post'));
+    } */
+
+    //Use route model binding
+    public function show(Post $post){
         return view('blogPosts.single-blog-post', compact('post'));
     }
 
@@ -30,8 +35,9 @@ class BlogController extends Controller
             'body' => 'required|min:10',
         ]);
 
+        $postId = Post::latest()->take(1)->first()->id + 1;
         $title = $request->title;
-        $slug = Str::slug($title, '-');
+        $slug = Str::slug($title, '-') . '-' . $postId;
         $user_id = Auth::user()->id;
         $body = $request->input('body');
         //Upload file
