@@ -22,7 +22,7 @@
       @yield('header')
 
       <!-- sidebar -->
-      <div class="sidebar">
+      <div class="sidebar ">
         <span class="closeButton">&times;</span>
         <p class="brand-title"><a href="{{ route('welcome.index') }}">Placide Blog</a></p>
 

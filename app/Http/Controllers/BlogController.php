@@ -45,6 +45,6 @@ class BlogController extends Controller
 
         $post->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Post as been successfuly added');
     }
 }
