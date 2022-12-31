@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
     public function index(){
         $posts = Post::latest()->get();
         return view('blogPosts.blog', compact('posts'));
