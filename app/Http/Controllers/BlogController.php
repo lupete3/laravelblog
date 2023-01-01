@@ -13,8 +13,13 @@ class BlogController extends Controller
     {
         $this->middleware('auth')->except(['index','show']);
     }
-    public function index(){
-        $posts = Post::latest()->get();
+    public function index(Request $request){
+        if($request->search){
+            $posts = Post::where('title','like','%' . $request->search . '%')
+            ->orWhere('body','like','%' . $request->search . '%')->latest()->get();
+        }else{
+            $posts = Post::latest()->get();
+        }
         return view('blogPosts.blog', compact('posts'));
     }
 
@@ -24,11 +29,17 @@ class BlogController extends Controller
 
     //Show edit page
     public function edit(Post $post){
+        if(auth()->user()->id !== $post->user->id){
+            abort(403);
+        }
         return view('blogPosts.edit-blog-post', compact('post'));
     }
 
     //Edit post 
     public function update(Post $post, Request $request){
+        if(auth()->user()->id !== $post->user->id){
+            abort(403);
+        }
         $request->validate([
             'title' => 'required|min:5',
             'image' => 'required|image',
@@ -52,12 +63,14 @@ class BlogController extends Controller
 
     //Edit post 
     public function delete(Post $post){
+        if(auth()->user()->id !== $post->user->id){
+            abort(403);
+        }
     
-       $post->delete();
+        $post->delete();
 
-       return redirect()->back()->with('success','Post as been successfuly deleted');
+        return redirect()->back()->with('success','Post as been successfuly deleted');
 
-        //dd($post);
     }
 
     /* public function show($slug){
