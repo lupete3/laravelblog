@@ -21,7 +21,13 @@
         </ul>
       </div>
 
+      <p style="color: white">
+        @if(session('success'))
+            {{session('success')}}
+        @endif
+    </p>
       <section class="cards-blog latest-blog">
+        
         
         @foreach ($posts as $post)
           <div class="card-blog-content">
@@ -29,7 +35,9 @@
               @if(auth()->user()->id === $post->user->id)
                 <div class="post-buttons" style="display: flex; margin-bottom:5px">
                   <a href="{{route('blog.edit',$post)}}" style="margin-right: 5px">Edit</a> 
-                  <form action="">
+                  <form action="{{route('blog.delete',$post)}}" method="post">
+                    @method('delete')
+                    @csrf
                     <input type="submit" value="Delete">
                   </form>
                 </div>

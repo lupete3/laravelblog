@@ -29,6 +29,8 @@ Route::get('/blog/{post:slug}',[BlogController::class, 'show'])->name('blog.sing
 Route::put('/blog/{post}/update',[BlogController::class, 'update'])->name('blog.update');
 //To show edit a post page  
 Route::get('/blog/{post}/edit',[BlogController::class, 'edit'])->name('blog.edit');
+//To show delete a post page  
+Route::delete('/blog/{post}/delete',[BlogController::class, 'delete'])->name('blog.delete');
 //To store data post in Db
 Route::post('/blog',[BlogController::class, 'store'])->name('blog.store');
 //To about page

@@ -49,6 +49,17 @@ class BlogController extends Controller
         //dd($post);
     }
 
+
+    //Edit post 
+    public function delete(Post $post){
+    
+       $post->delete();
+
+       return redirect()->back()->with('success','Post as been successfuly deleted');
+
+        //dd($post);
+    }
+
     /* public function show($slug){
         $post = Post::where('slug', $slug)->first();
         return view('blogPosts.single-blog-post', compact('post'));
