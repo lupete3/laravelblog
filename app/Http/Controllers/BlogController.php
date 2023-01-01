@@ -11,7 +11,7 @@ class BlogController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index','show']);
     }
     public function index(){
         $posts = Post::latest()->get();
@@ -20,6 +20,33 @@ class BlogController extends Controller
 
     public function create(){
         return view('blogPosts.create-blog-post');
+    }
+
+    //Show edit page
+    public function edit(Post $post){
+        return view('blogPosts.edit-blog-post', compact('post'));
+    }
+
+    //Edit post 
+    public function update(Post $post, Request $request){
+        $request->validate([
+            'title' => 'required|min:5',
+            'image' => 'required|image',
+            'body' => 'required|min:10',
+        ]);
+        
+        $imagePath = 'storage/'.$request->file('image')->store('postImages','public');
+
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title, '-') . '-' . $post->id;
+        $post->body = $request->body;
+        $post->imagePath = $imagePath;
+
+       $post->save();
+
+       return redirect()->back()->with('success','Post as been successfuly edited');
+
+        //dd($post);
     }
 
     /* public function show($slug){
