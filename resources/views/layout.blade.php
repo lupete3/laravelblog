@@ -15,6 +15,8 @@
     <!-- AOS library -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+    <script src="https://cdn.tailwindcss.com"></script>
+
   </head>
   <body>
     <div id="wrapper">
