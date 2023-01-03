@@ -3,4 +3,5 @@
 
     <p style="margin-top: 2%">Name : {{$data['name']}}</p>
     <p>Subject : {{$data['subject']}}</p>
+    <p>Email : {{$data['email']}}</p>
 </div>
