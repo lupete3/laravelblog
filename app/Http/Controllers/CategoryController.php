@@ -19,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest()->paginate(6);
+        return view('categories.categories-index', compact('categories'));
     }
 
     /**
@@ -74,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit-category',compact('category'));
     }
 
     /**
@@ -86,7 +87,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|unique:categories',
+        ]);
+
+        $name = $request->name;
+
+        $category->name = $name;
+
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category as been edited successfuly');
     }
 
     /**

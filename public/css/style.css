@@ -503,4 +503,11 @@ textarea {
   .categories ul li:nth-of-type(4) {
     margin-bottom: 25px;
   }
+
+  .edit{
+    background-color: green; 
+    color:white; 
+    padding:0.5em; 
+    border-radius:5px
+  }
 }
