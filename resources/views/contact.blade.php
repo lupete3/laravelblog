@@ -39,22 +39,37 @@
 
           <!-- Contact Form -->
           <div class="contact-form">
-            <form action="" method="">
+            @include('includes.flash-message')
+            <form action="{{route('contact.store')}}" method="post">
+                @method('post')
+                @csrf
               <!-- Name -->
               <label for="name"><span>Name</span></label>
               <input type="text" id="name" name="name" value="" />
+                @error('name')
+                    <p style="color:red; margin-bottom:15px;">{{$message}}</p>
+                @enderror
 
               <!-- Email -->
               <label for="email"><span>Email</span></label>
               <input type="text" id="email" name="email" value="" />
+                @error('email')
+                    <p style="color:red; margin-bottom:15px;">{{$message}}</p>
+                @enderror
 
               <!-- Subject -->
               <label for="subject"><span>Subject</span></label>
               <input type="text" id="Subject" name="subject" value="" />
+                @error('subject')
+                    <p style="color:red; margin-bottom:15px;">{{$message}}</p>
+                @enderror
 
               <!-- Message -->
               <label for="message"><span>Message</span></label>
               <textarea id="message" name="message"></textarea>
+                @error('message')
+                    <p style="color:red; margin-bottom:15px;">{{$message}}</p>
+                @enderror
 
                <!-- Button -->
               <input type="submit" value="Submit" />

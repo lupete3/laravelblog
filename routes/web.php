@@ -38,6 +38,8 @@ Route::post('/blog',[BlogController::class, 'store'])->name('blog.store');
 Route::get('/about',[WelcomeController::class, 'about'])->name('about');
 //To contact index
 Route::get('/contact',[ContactController::class, 'index'])->name('contact.index');
+//To send a message
+Route::post('/contact',[ContactController::class, 'store'])->name('contact.store');
 
 //Post Resources
 Route::resource('/categories', CategoryController::class);

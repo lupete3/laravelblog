@@ -170,13 +170,23 @@ return [
             'required' => 'Please choose a category',
         ],
         'name' => [
-            'required' => 'Please enter a name of category please',
+            'required' => 'Please enter a name ',
             'min' => 'The name must be under 3 characters',
             'unique' => 'This category name exist in system',
         ],
         'image' => [
             'image' => 'Choose a ivalide image',
             'required' => 'Choose a image file please',
+        ],
+        'email' => [
+            'email' => 'Please enter a vaid email',
+            'required' => 'Please enter an email',
+        ],
+        'subject' => [
+            'required' => 'Please enter a subject',
+        ],
+        'message' => [
+            'required' => 'Please enter a message',
         ]
         
     ],
