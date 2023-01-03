@@ -166,6 +166,9 @@ return [
             'required' => 'Please enter a title please',
             'min' => 'The title must be under 5 characters',
         ],
+        'category' => [
+            'required' => 'Please choose a category',
+        ],
         'name' => [
             'required' => 'Please enter a name of category please',
             'min' => 'The name must be under 3 characters',

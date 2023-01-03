@@ -12,9 +12,7 @@
         <section id="contact-us" class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="contact-form p-6 text-gray-900">
                 <p style="color: green">
-                    @if(session('success'))
-                        {{session('success')}}
-                    @endif
+                    @include('includes.flash-message')
                 </p>
                 <table width='100%'>
                     <thead>
@@ -26,7 +24,7 @@
                             <tr >
                                 <td>{{$category->name}}</td>
                                 <td style="display:flex">
-                                    <a href="{{route('categories.edit',$category)}}" ><button style="background-color: rgb(24, 158, 95); color:white; padding:0.3em;margin:0.3em; border-radius:5px">Delete</button></a> 
+                                    <a href="{{route('categories.edit',$category)}}" ><button style="background-color: rgb(24, 158, 95); color:white; padding:0.3em;margin:0.3em; border-radius:5px">Edit</button></a> 
                                     <form action="{{route('categories.destroy',$category)}}" method="post">
                                         @method('delete')
                                         @csrf

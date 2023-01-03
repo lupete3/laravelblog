@@ -15,16 +15,12 @@
       <div class="categories">
         <ul>
           @foreach ($categories as $categorie)
-            <li><a href="">{{$categorie->name}}</a></li>
+            <li><a href="{{route('blog.index', ['category' => $categorie->name])}}">{{$categorie->name}}</a></li>
           @endforeach
         </ul>
       </div>
 
-      <p style="color: white">
-        @if(session('success'))
-            {{session('success')}}
-        @endif
-    </p>
+      @include('includes.flash-message')
       <section class="cards-blog latest-blog">
         
         
@@ -33,11 +29,11 @@
             @auth
               @if(auth()->user()->id === $post->user->id)
                 <div class="post-buttons" style="display: flex; margin-bottom:5px">
-                  <a href="{{route('blog.edit',$post)}}" style="margin-right: 5px">Edit</a> 
+                  <a href="{{route('blog.edit',$post)}}"><button style="background-color: rgb(24, 158, 95); color:white; padding:0.1em;margin:0.3em; border-radius:5px">Edit</button></a> 
                   <form action="{{route('blog.delete',$post)}}" method="post">
                     @method('delete')
                     @csrf
-                    <input type="submit" value="Delete">
+                    <button type="submit" style="background-color: rgb(209, 42, 59); color:white; padding:0.1em;margin:0.3em; border-radius:5px">Delete</button>
                   </form>
                 </div>
               @endif

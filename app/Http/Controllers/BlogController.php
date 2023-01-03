@@ -18,6 +18,8 @@ class BlogController extends Controller
         if($request->search){
             $posts = Post::where('title','like','%' . $request->search . '%')
             ->orWhere('body','like','%' . $request->search . '%')->latest()->paginate(4);
+        }elseif($request->category){
+            $posts = Category::where('name',$request->category)->firstOrFail()->posts()->paginate(4)->withQueryString();
         }else{
             $posts = Post::latest()->paginate(4);
         }
@@ -27,7 +29,8 @@ class BlogController extends Controller
     }
 
     public function create(){
-        return view('blogPosts.create-blog-post');
+        $categories = Category::all();
+        return view('blogPosts.create-blog-post', compact('categories'));
     }
 
     //Show edit page
@@ -35,7 +38,8 @@ class BlogController extends Controller
         if(auth()->user()->id !== $post->user->id){
             abort(403);
         }
-        return view('blogPosts.edit-blog-post', compact('post'));
+        $categories = Category::all();
+        return view('blogPosts.edit-blog-post', compact('post', 'categories'));
     }
 
     //Edit post 
@@ -45,6 +49,7 @@ class BlogController extends Controller
         }
         $request->validate([
             'title' => 'required|min:5',
+            'category' => 'required',
             'image' => 'required|image',
             'body' => 'required|min:10',
         ]);
@@ -52,6 +57,7 @@ class BlogController extends Controller
         $imagePath = 'storage/'.$request->file('image')->store('postImages','public');
 
         $post->title = $request->title;
+        $post->category_id = $request->category;
         $post->slug = Str::slug($request->title, '-') . '-' . $post->id;
         $post->body = $request->body;
         $post->imagePath = $imagePath;
@@ -89,12 +95,18 @@ class BlogController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required|min:5',
+            'category' => 'required',
             'image' => 'required|image',
             'body' => 'required|min:10',
         ]);
-
-        $postId = Post::latest()->take(1)->first()->id + 1;
+        if (Post::latest()->first() !== null) {
+            $postId = Post::latest()->first()->id + 1;
+        }else{
+            $postId = 1;
+        }
+        
         $title = $request->title;
+        $category_id = $request->category;
         $slug = Str::slug($title, '-') . '-' . $postId;
         $user_id = Auth::user()->id;
         $body = $request->input('body');
@@ -104,6 +116,7 @@ class BlogController extends Controller
         $post = new Post();
 
         $post->title = $title;
+        $post->category_id = $category_id;
         $post->slug = $slug;
         $post->body = $body;
         $post->imagePath = $imagePath;

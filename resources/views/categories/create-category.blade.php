@@ -11,11 +11,7 @@
     <main class="py-12 container max-w-7xl mx-auto sm:px-6 lg:px-8">
         <section id="contact-us" class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="contact-form p-6 text-gray-900">
-                <p class="text-danger">
-                    @if(session('success'))
-                        {{session('success')}}
-                    @endif
-                </p>
+                @include('includes.flash-message')
                 <form method="post" action="{{route('categories.store')}}" >
                     @method('post')
                     @csrf

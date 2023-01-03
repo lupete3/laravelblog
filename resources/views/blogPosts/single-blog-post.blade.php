@@ -7,7 +7,7 @@
 
         <p class="time-and-author">
           {{$post->created_at->diffForHumans()}}
-          <span>Written By {{$post->user->name}}</span>
+          <span>Written By {{$post->user->name}}/{{$post->category->name}}</span>
         </p>
 
         <div class="single-blog-post-ContentImage" data-aos="fade-left">
