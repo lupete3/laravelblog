@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -20,7 +21,9 @@ class BlogController extends Controller
         }else{
             $posts = Post::latest()->paginate(4);
         }
-        return view('blogPosts.blog', compact('posts'));
+
+        $categories = Category::all();
+        return view('blogPosts.blog', compact('posts', 'categories'));
     }
 
     public function create(){
