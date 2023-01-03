@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create-category');
     }
 
     /**
@@ -35,7 +40,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|unique:categories',
+        ]);
+
+        $name = $request->input('name');
+
+        $category = new Category();
+
+        $category->name = $name;
+
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category as been added successfuly');
     }
 
     /**

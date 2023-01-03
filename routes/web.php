@@ -40,16 +40,16 @@ Route::get('/about',[WelcomeController::class, 'about'])->name('about');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact.index');
 
 //Post Resources
-Route::resources('/categories', CategoryController::class);
+Route::resource('/categories', CategoryController::class);
 
 //The ressource controller above under the hood
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
-Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('categories.delete');
+// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+// Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+// Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+// Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+// Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+// Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+// Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('categories.delete');
 
 //To dashboard page
 Route::get('/dashboard', function () {
